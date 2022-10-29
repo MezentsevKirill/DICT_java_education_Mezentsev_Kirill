@@ -27,5 +27,20 @@ public class ChatBot {
             System.out.println(counter + " !");
             counter += 1;
         }
+        // 5-th stage
+        System.out.println("Let's test your programming knowledge");
+        System.out.println("Which companies provide the most popular cloud services?");
+        System.out.println("1. Google \n2. Adobe \n3. Valve \n4. Mozilla");
+        int check = 0;
+        while(check == 0) {
+            int userChoice = scanner.nextInt();
+            if (userChoice == 1){
+                check = 1;
+                System.out.println("Completed, have a nice day!");
+            }
+            else {
+                System.out.println("Please, try again");
+            }
+        }
     }
 }
