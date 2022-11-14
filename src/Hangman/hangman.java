@@ -1,18 +1,19 @@
 package Hangman;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class hangman {
     public static void main(String[] args) {
         System.out.println("HANGMAN");
         Scanner scanner = new Scanner(System.in);
-        String[] rightWord = {"python"};
+        String[] rightWord = {"python","java", "javascript", "kotlin"};
         System.out.print("Guess the word: > ");
         String userWord = scanner.next();
-        boolean found = Arrays.asList(rightWord).contains(userWord);
-        if (found) {
+        int a = (int) (Math.random() * 4);
+        if (userWord.equals(rightWord[a])) {
             System.out.println("You survived!");
         }
-
+        else {
+            System.out.println("You lost!");
+        }
     }
 }
