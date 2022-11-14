@@ -2,7 +2,6 @@ package Hangman;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class hangman {
@@ -10,6 +9,8 @@ public class hangman {
     public static Random random = new Random();
     public static Scanner scanner = new Scanner(System.in);
     public static ArrayList<String> wordList = new ArrayList<>();
+
+
 
     public static void printBoard(ArrayList<String>wordList, int life){
         for (String x: wordList){
@@ -57,8 +58,15 @@ public class hangman {
                 char letter = answer.charAt(0);
 
                 if (wordList.contains(answer)){
-                    System.out.println("No improvements");
-                    life -= 1;
+                    System.out.println("You've already guessed this letter");
+                } else if (answer.length() >= 2) {
+                    System.out.println("You should input a single letter");
+                    continue;
+
+                } else if (Pattern.matches("[A-Z]", answer)) {
+                    System.out.println("Please enter a lowercase English letter");
+                    continue;
+                    
                 }
 
                 for (int i = 0; i < theWord.length(); i++) {
