@@ -40,51 +40,71 @@ public class hangman {
     }
     public static void main(String[] args){
 
-        String theWord = "";
-        int life = 8;
-        System.out.println("HANGMAN");
+        while(true){
+            String theWord = "";
+            wordList.clear();
+            int life = 8;
+            System.out.println("HANGMAN");
+            System.out.print("Type 'play' to play the game, 'exit' to quit: > ");
+            String menu = scanner.nextLine();
 
-        int index = random.nextInt(words.length);
-        theWord += words[index];
+            if (menu.equals("exit")) {
+                System.out.println("Exiting...");
+                break;
 
 
-        for (int i = 0; i < theWord.length(); i++) {
-            wordList.add("_");
-        }
-            while (checkWinner(wordList, theWord, life)) {
-                printBoard(wordList, life);
-                System.out.print("\nInput a letter: > ");
-                String answer = scanner.nextLine();
-                char letter = answer.charAt(0);
+            }else if (menu.equals("play")) {
+                int index = random.nextInt(words.length);
+                theWord += words[index];
 
-                if (wordList.contains(answer)){
-                    System.out.println("You've already guessed this letter");
-                } else if (answer.length() >= 2) {
-                    System.out.println("You should input a single letter");
-                    continue;
-
-                } else if (Pattern.matches("[A-Z]", answer)) {
-                    System.out.println("Please enter a lowercase English letter");
-                    continue;
-                    
-                }
 
                 for (int i = 0; i < theWord.length(); i++) {
-                    if (theWord.charAt(i) == letter) {
-                        wordList.remove(i);
-                        wordList.add(i, answer);
+                    wordList.add("_");
+                }
+
+                while (checkWinner(wordList, theWord, life)) {
+                    printBoard(wordList, life);
+                    System.out.print("\nInput a letter: > ");
+                    String answer = scanner.nextLine();
+                    char letter = answer.charAt(0);
+
+                    if (wordList.contains(answer)){
+                        System.out.println("You've already guessed this letter");
+                    } else if (answer.length() >= 2) {
+                        System.out.println("You should input a single letter");
+                        continue;
+
+                    } else if (Pattern.matches("[A-Z]", answer)) {
+                        System.out.println("Please enter a lowercase English letter");
+                        continue;
 
                     }
+
+                    for (int i = 0; i < theWord.length(); i++) {
+                        if (theWord.charAt(i) == letter) {
+                            wordList.remove(i);
+                            wordList.add(i, answer);
+
+                        }
+                    }
+
+                    if (!wordList.contains(answer)) {
+                        System.out.println("That letter doesn't appear in the word");
+                        life -= 1;
+                    }
+
+
                 }
 
-                if (!wordList.contains(answer)) {
-                    System.out.println("That letter doesn't appear in the word");
-                    life -= 1;
-                }
-
-
-                System.out.println();
+        } else {
+                System.out.println("Invalid input");
             }
+
+
+
+
+
+         }
 
 
     }
