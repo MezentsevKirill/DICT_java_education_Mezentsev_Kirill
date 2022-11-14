@@ -26,7 +26,7 @@ public class hangman {
         }
 
         if (winnerCheck.equals(theWord)){
-            System.out.println("Thanks for playing!\nWe'll see how well you did in the next stage");
+            System.out.println("You guessed the word!\nYou survived!");
             return false;
         }else if (life == 0){
             System.out.println("You lost!");
@@ -57,6 +57,7 @@ public class hangman {
                 char letter = answer.charAt(0);
 
                 if (wordList.contains(answer)){
+                    System.out.println("No improvements");
                     life -= 1;
                 }
 
