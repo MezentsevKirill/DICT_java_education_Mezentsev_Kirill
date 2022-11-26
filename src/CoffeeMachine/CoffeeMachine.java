@@ -16,45 +16,82 @@ public class CoffeeMachine {
                 numbers[4] + " of money");
     }
 
-    public static int [] espresso (){
-         numbers[0] -= 250;
-         numbers[2] -= 16;
-         numbers[3] -= 1;
-         numbers[4] -= 4;
-         return numbers;
+    public static int [] espresso () {
+        if (numbers[0] < 250) {
+            System.out.println("Sorry, not enough water");
+        } else if (numbers[2] < 16) {
+            System.out.println("Sorry, not enough coffee beans");
+        } else if (numbers[3] < 1) {
+            System.out.println("Sorry, not enough disposable coffee cups");
+        } else {
+            numbers[0] -= 250;
+            numbers[2] -= 16;
+            numbers[3] -= 1;
+            numbers[4] += 4;
+            System.out.println("I have enough resources, making you a coffee!");
+        }
+        return numbers;
     }
 
     public static int [] latte (){
-        numbers[0] -= 350;
-        numbers[1] -= 75;
-        numbers[2] -= 20;
-        numbers[3] -= 1;
-        numbers[4] -= 7;
+        if (numbers[0] < 350) {
+            System.out.println("Sorry, not enough water");
+        } else if (numbers[1] < 75) {
+            System.out.println("Sorry, not enough milk");
+        } else if (numbers[2] < 20) {
+            System.out.println("Sorry, not enough coffee beans");
+        } else if (numbers[3] < 1) {
+            System.out.println("Sorry, not enough disposable coffee cups");
+        } else {
+            numbers[0] -= 350;
+            numbers[1] -= 75;
+            numbers[2] -= 20;
+            numbers[3] -= 1;
+            numbers[4] += 7;
+            System.out.println("I have enough resources, making you a coffee!");
+        }
         return numbers;
     }
 
     public static int [] cappuccino () {
-        numbers[0] -= 200;
-        numbers[1] -= 100;
-        numbers[2] -= 12;
-        numbers[3] -= 1;
-        numbers[4] -= 6;
+        if (numbers[0] < 200) {
+            System.out.println("Sorry, not enough water");
+        } else if (numbers[1] < 100) {
+            System.out.println("Sorry, not enough milk");
+        } else if (numbers[2] < 12) {
+            System.out.println("Sorry, not enough coffee beans");
+        } else if (numbers[3] < 1) {
+            System.out.println("Sorry, not enough disposable coffee cups");
+        } else {
+            numbers[0] -= 200;
+            numbers[1] -= 100;
+            numbers[2] -= 12;
+            numbers[3] -= 1;
+            numbers[4] += 6;
+            System.out.println("I have enough resources, making you a coffee!");
+        }
         return numbers;
 
     }
 
     public static void buy() {
-        System.out.print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n> ");
-        int userChoice = scanner.nextInt();
-        if (userChoice == 1) {
+        System.out.print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back – to" +
+                "main menu:\n> ");
+        String userChoice = scanner.next();
+        if (userChoice.equals("1")) {
             numbers = espresso();
+            printBoard();
 
-        } else if (userChoice == 2) {
+        } else if (userChoice.equals("2")) {
             numbers = latte();
+            printBoard();
 
-        } else if (userChoice == 3) {
+        } else if (userChoice.equals("3")) {
             numbers = cappuccino();
+            printBoard();
 
+        }else if (userChoice.equals("back")){
+            System.out.print("");
         }
 
 
@@ -80,23 +117,37 @@ public class CoffeeMachine {
         numbers[4] -= numbers[4];
     }
 
-    public static void main(String[] args) {
+    public static void remaining() {
         printBoard();
-        System.out.print("Write action (buy, fill, take):\n> ");
-        String userAction = scanner.next();
-        if (userAction.equals("buy")) {
-            buy();
+    }
 
-        } else if (userAction.equals("fill")) {
-            fill();
+    public static void main(String[] args) {
+        boolean value = true;
+        while (value){
+            System.out.print("Write action (buy, fill, take, remaining, exit):\n> ");
+            String userAction = scanner.next();
 
-        } else if (userAction.equals("take")) {
-            take();
+            if (userAction.equals("exit")) {
+                value = false;
+
+            }else if (userAction.equals("buy")) {
+                buy();
+
+            } else if (userAction.equals("fill")) {
+                fill();
+                printBoard();
+
+            } else if (userAction.equals("take")) {
+                take();
+                printBoard();
+
+            } else if (userAction.equals("remaining")) {
+                remaining();
+
+            }
+
 
         }
-
-        printBoard();
-
 
 
     }
