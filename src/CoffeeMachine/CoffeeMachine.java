@@ -1,7 +1,10 @@
 package CoffeeMachine;
 import java.util.Scanner;
 
-
+class CoffeeMachineStatus {
+    String action;
+    String status;
+}
 
 public class CoffeeMachine {
     public static int [] numbers = {400, 540, 120, 9, 550};
@@ -122,26 +125,29 @@ public class CoffeeMachine {
     }
 
     public static void main(String[] args) {
+        CoffeeMachineStatus status = new CoffeeMachineStatus();
         boolean value = true;
         while (value){
+            status.status = "Choice of action";
             System.out.print("Write action (buy, fill, take, remaining, exit):\n> ");
-            String userAction = scanner.next();
+            status.action = scanner.next();
 
-            if (userAction.equals("exit")) {
+            if (status.action.equals("exit")) {
                 value = false;
 
-            }else if (userAction.equals("buy")) {
+            }else if (status.action.equals("buy")) {
+                status.status = "Selection of the type of coffee";
                 buy();
 
-            } else if (userAction.equals("fill")) {
+            } else if (status.action.equals("fill")) {
                 fill();
                 printBoard();
 
-            } else if (userAction.equals("take")) {
+            } else if (status.action.equals("take")) {
                 take();
                 printBoard();
 
-            } else if (userAction.equals("remaining")) {
+            } else if (status.action.equals("remaining")) {
                 remaining();
 
             }
